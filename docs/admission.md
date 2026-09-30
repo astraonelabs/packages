@@ -1,35 +1,22 @@
 # Plugin admission
 
-Admission is a reviewed Registry change. It is not a side effect of releasing
-a plugin and it does not publish the catalog automatically.
+Admission is a reviewed Packages change. It does not publish automatically.
 
-## Admission checklist
+Before requesting a change, confirm the plugin owns a package-native release
+lifecycle and that the Packages GitHub App has authorized read-only access.
+Add its current `https://github.com/astraonelabs/<repository>.git` VCS URL and
+Composer name to `satis.json`. Review the matching selector and validator
+allowlist before broadening the catalog. The current reviewed scope admits only
+`astraone/access-control` from `astraonelabs/access-control`.
 
-Before requesting a Registry change, confirm that:
+Read each release's tagged manifest rather than trusting the default branch's
+name. Historical tags naming the previous package must not be exported under
+the new identity. Run [local generation](local-generation.md) and inspect its
+selection inventory and resulting metadata before publication.
 
-1. The plugin is ready for its own package-native release lifecycle, including
-   Release Please readiness and package-native tests.
-2. The Registry's read-only GitHub App reader access has been established for
-   the publication workflow. Operational installation details remain outside
-   this repository.
-3. A reviewed change adds the plugin's Masterix GitHub HTTPS VCS URL under
-   `repositories` in [`satis.json`](../satis.json).
-4. The same reviewed change adds the plugin's Composer package name under
-   `require`.
-5. The Registry change is merged before publication is attempted.
-6. The plugin has a stable release before the catalog is published.
+A merged allowlist change and a stable source release are separate prerequisites
+for the manually authorized [publication](publication.md). Do not edit generated
+`public/` files to admit a package or bypass reader-access review.
 
-For the current concrete example, the source URL and package name are the
-`identity-access` entries already present in `satis.json`. Future guides must
-replace those values with the candidate plugin's reviewed values; do not copy
-the example as a universal package configuration.
-
-## Review boundary
-
-The allowlist is the admission boundary. Do not add packages directly to
-generated `public/` files, bypass review, or treat a source release as
-permission to publish.
-
-The Registry catalog contains Composer metadata only. Source retrieval remains
-authenticated by the consumer and the Registry does not proxy source archives
-or publish credentials.
+The catalog contains metadata only. Package code stays in its GitHub repository;
+consumer authentication is still required and source archives are not proxied.

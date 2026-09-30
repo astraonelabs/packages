@@ -1,16 +1,19 @@
 {
-    "name": "masterix/composer-registry",
-    "description": "Public Composer metadata for approved Masterix private packages.",
-    "homepage": "https://masterix-sistemas.github.io/composer-registry",
+    "name": "astraone/packages",
+    "description": "Public Composer metadata for approved Astra One Labs private packages.",
+    "homepage": "https://astraonelabs.github.io/packages/",
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/Masterix-Sistemas/identity-access.git"
+            "url": "https://github.com/astraonelabs/access-control.git"
         }
     ],
     "require": {
-        "masterix/identity-access": "*"
+        "astraone/access-control": "*"
     },
     "minimum-stability": "stable",
-    "output-dir": "public"
+    "output-dir": "public",
+    "require-all": false,
+    "require-dependencies": false,
+    "require-dev-dependencies": false
 }

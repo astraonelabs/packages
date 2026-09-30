@@ -29,31 +29,7 @@ jobs:
       - name: Build Composer metadata
         env:
           COMPOSER_HOME: ${{ runner.temp }}/composer
-        run: |
-          docker run --rm --init \
-            --user "$(id -u):$(id -g)" \
-            --volume "$GITHUB_WORKSPACE:/build" \
-            --volume "$COMPOSER_HOME:/composer" \
-            composer/satis@sha256:6262eb4a007086b5589b7558789caf3d3e78c570481c5e0638398c00c4661df1 \
-            build /build/satis.json /build/public
-
-      - name: Verify generated catalog
-        run: |
-          test -f public/packages.json
-          jq -e --slurpfile config satis.json '
-            ($config[0].require | keys) as $required
-            | (."available-packages" // []) as $available
-            | all($required[]; . as $package | ($available | index($package)))
-          ' public/packages.json
-          jq -e --slurp --slurpfile config satis.json '
-            ($config[0].require | keys) as $required
-            | (reduce .[] as $catalog ({}; . + ($catalog.packages // {}))) as $packages
-            | all($required[]; . as $package | (($packages[$package] // {}) | length) > 0)
-          ' \
-          public/include/*.json
-          test ! -d public/dist
-          test ! -d public/downloads
-          ! find public -type f \( -name '*.zip' -o -name '*.tar' -o -name '*.tar.gz' -o -name '*.tgz' \) -print -quit | grep -q .
+        run: bash scripts/build-catalog.sh satis.json public
 
       - uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4.0.0
         with:
@@ -96,13 +72,13 @@ jobs:
       - name: Install from published catalog
         env:
           COMPOSER_HOME: ${{ runner.temp }}/composer
-          REGISTRY_URL: ${{ needs.deploy.outputs.page_url }}
+          PACKAGES_URL: ${{ needs.deploy.outputs.page_url }}
         run: |
           mkdir -p "$COMPOSER_HOME" "$RUNNER_TEMP/consumer"
-          curl --fail --retry 12 --retry-delay 5 "${REGISTRY_URL%/}/packages.json" >/dev/null
+          curl --fail --retry 12 --retry-delay 5 "${PACKAGES_URL%/}/packages.json" >/dev/null
           cd "$RUNNER_TEMP/consumer"
-          composer init --name=masterix/registry-verification --no-interaction
-          composer config repositories.masterix composer "$REGISTRY_URL"
+          composer init --name=astraone/catalog-verification --no-interaction
+          composer config repositories.astraone composer "$PACKAGES_URL"
           mapfile -t packages < <(jq -r '.require | keys[]' "$GITHUB_WORKSPACE/satis.json")
           test "${#packages[@]}" -gt 0
           composer require "${packages[@]}" --no-interaction --no-progress

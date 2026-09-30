@@ -21,12 +21,12 @@ runs:
               .repositories[]
               | select(.type == "vcs")
               | .url
-              | select(startswith("https://github.com/Masterix-Sistemas/"))
-              | sub("^https://github\\.com/Masterix-Sistemas/"; "")
+              | select(startswith("https://github.com/astraonelabs/"))
+              | sub("^https://github\\.com/astraonelabs/"; "")
               | sub("\\.git$"; "")
             ]
             | unique
-            | if length > 0 then join(",") else error("no Masterix GitHub VCS repositories configured") end
+            | if length > 0 then join(",") else error("no Astra One Labs GitHub VCS repositories configured") end
           ' satis.json
         })"
         echo "names=$repositories" >> "$GITHUB_OUTPUT"
@@ -36,7 +36,7 @@ runs:
       with:
         app-id: ${{ inputs.app-id }}
         private-key: ${{ inputs.private-key }}
-        owner: Masterix-Sistemas
+        owner: astraonelabs
         repositories: ${{ steps.github-repositories.outputs.names }}
 
     - shell: bash
