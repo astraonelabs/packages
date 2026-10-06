@@ -40,6 +40,7 @@ git("-c", "tag.gpgsign=false", "tag", "v0.0.0", cwd=manifest_path.parent)
 for name in ("legacy", "projected"):
     config = json.loads((ROOT / "satis.json").read_text())
     config["repositories"] = [{"type": "vcs", "url": str(work / name)}]
+    config["require"]["astraone/access-control"] = "*"
     config["output-dir"] = str((work / f"{name}-output").relative_to(ROOT))
     (work / f"{name}.json").write_text(json.dumps(config, indent=4) + "\n")
 provenance = {"preparatory_only": True, "input_revision": revision, "existing_tags": tags, "projected_revision": git("rev-parse", "HEAD", cwd=manifest_path.parent), "synthetic_tag": "v0.0.0", "changes": ["Composer name and preparatory description only; package runtime contracts are untouched."]}

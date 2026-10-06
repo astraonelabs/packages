@@ -12,10 +12,11 @@ names `masterix/identity-access`. None is a release of `astraone/access-control`
 
 Preserve these tags as historical references; do not retag them or give them
 compatibility aliases. The runtime rename is a breaking contract change.
-The consumable release number and Foundation constraint must be agreed with
-the resulting package during task 11. The catalog's `*` allowlist selects
-stable releases of the admitted identity; it does not prescribe a consumer
-constraint. A synthetic `v0.0.0` below is a test input only and reserves no
+A tarefa11 definiu 2.0.0 e `^2.0` após reinspecionar as tags reais. Consulte
+[distribuição local](local-distribution.md) para a prova consumível sem tags.
+A projeção abaixo conserva seu papel histórico de preparação10. O catálogo real seleciona `^2.0`; a projeção histórica abaixo usa `*`
+somente no input ignorado para admitir sua versão sintética0.0.0, sem mudar a
+constraint2.0 do consumidor ou do catálogo de distribuição. A synthetic `v0.0.0` below is a test input only and reserves no
 release number in the original repository.
 
 Composer's Git VCS driver can normalize every version to the package name from

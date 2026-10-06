@@ -7,9 +7,9 @@ the catalog does not publish package contents, source archives or credentials.
 
 The reviewed catalog identifies itself as `astraone/packages` and admits
 `astraone/access-control` from
-`https://github.com/astraonelabs/access-control.git`. This is preparation for the
-new package contract; a consumable release and the Foundation constraint are
-confirmed only with the integrated package in task 11.
+`https://github.com/astraonelabs/access-control.git`. A versão planejada é **2.0.0**, com constraint `^2.0` no catálogo e Foundation.
+A candidata local foi validada antes de qualquer release/publicação. Consulte
+[distribuição local](docs/local-distribution.md).
 
 ## Generate and verify locally
 

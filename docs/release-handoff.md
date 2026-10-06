@@ -6,8 +6,9 @@ Releasing the package never dispatches or deploys the catalog automatically.
 1. Complete Access Control's package-native implementation and release checks.
 2. Confirm authorized reader access to `astraonelabs/access-control`.
 3. Review catalog admission and [local generation](local-generation.md).
-4. Confirm the consumable new package version and Foundation constraint during
-   task 11; historical old-named tags do not satisfy the new identity.
+4. A candidata11 escolhe 2.0.0 e `^2.0`; revisar a instalação limpa em
+   [distribuição local](local-distribution.md). Após squash, reconciliar o lock
+   Foundation com a revisão efetivamente lançada; tags antigas não satisfazem o nome novo.
 5. After reviewed integration, create a real stable package release through its
    own authorized lifecycle.
 6. Obtain publication authorization and manually run [publish](publication.md).
