@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "astraone/access-control": "*"
+        "astraone/access-control": "^2.0"
     },
     "minimum-stability": "stable",
     "output-dir": "public",
