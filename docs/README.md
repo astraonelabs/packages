@@ -1,33 +1,21 @@
-# Composer Registry guides
+# Packages guides
 
-The Composer Registry publishes public Composer metadata for approved private
-packages. It does not publish source archives, credentials, or private package
-contents.
+Astra One Labs Packages publishes public Composer metadata for approved private
+packages. Package code and authenticated source retrieval remain on GitHub.
 
-## Choose a guide
+| Need | Guide |
+| --- | --- |
+| Generate before a new release and inspect version strategy | [Local generation](local-generation.md) |
+| Hand a real stable release to catalog publication | [Release handoff](release-handoff.md) |
+| Review the source and package allowlist | [Plugin admission](admission.md) |
+| Publish manually after authorization | [Manual publication](publication.md) |
+| Consume metadata or integrate a local checkout | [Consumer integration](consumer-integration.md) |
+| Review credential names and workflow references | [Credential inventory](credential-inventory.md) |
 
-| Need | Guide | Owning boundary |
-| --- | --- | --- |
-| Hand a stable plugin release to the Registry | [Release handoff](release-handoff.md) | Plugin release readiness and Registry publication are separate events. |
-| Admit another private plugin | [Plugin admission](admission.md) | The Registry owns the reviewed source and package allowlist. |
-| Publish the catalog manually | [Manual publication](publication.md) | The Registry owns the manually dispatched build, deployment, and verification. |
-| Consume a released package or test a local checkout | [Consumer and local integration](consumer-integration.md) | Platform owns consumer configuration and local overrides. |
-| Review configured Actions credential metadata | [Credential inventory](credential-inventory.md) | This page records names and references only. |
+Packages owns admission, tag selection, metadata generation and publication.
+[Access Control](https://github.com/astraonelabs/access-control) owns the package
+and its releases; [Foundation](https://github.com/astraonelabs/foundation) owns
+the consumer and local overrides. The fixture projection used by task 10 is
+preparation evidence and must not be published.
 
-## Repository boundaries
-
-- The Registry owns the reviewed `satis.json` allowlist and manual catalog
-  publication.
-- A plugin repository owns package-native development, release readiness, and
-  release policy. [Identity & Access release guidance](https://github.com/Masterix-Sistemas/identity-access/blob/main/docs/release.md)
-  is the concrete example.
-- Platform owns stable dependency selection, consumer authentication, and
-  local plugin integration. See its [release and consumer handoff guide](https://github.com/Masterix-Sistemas/platform/blob/main/docs/release-and-consumption.md)
-  and [local Identity & Access integration guide](https://github.com/Masterix-Sistemas/platform/blob/main/docs/integrating-identity-access.md).
-
-## Privacy boundary
-
-These guides intentionally document only public workflow behavior and
-metadata-only credential inventory. They do not record secret values, private
-keys, tokens, installation identifiers, installation details, or developer
-machine paths.
+The guides record no credential values, keys, tokens or installation identifiers.

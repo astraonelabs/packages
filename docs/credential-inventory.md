@@ -1,12 +1,17 @@
 # Actions credential inventory
 
-This is a metadata-only audit of the Composer Registry repository's configured
+This is a metadata-only audit of the Packages repository's configured
 GitHub Actions credentials. It is intentionally limited to names, observed
 workflow references, and non-sensitive purpose.
 
 Audit snapshot: 2026-08-02.
 
-Owning repository: `Masterix-Sistemas/composer-registry`.
+Historical owning repository at that audit: `Masterix-Sistemas/composer-registry`.
+Current configured repository and destination: `astraonelabs/packages` and
+`https://astraonelabs.github.io/packages/`. The task 10 change preserves the
+existing secret names; their current operational configuration and installation
+access were not re-audited. The reader-auth action now derives `astraonelabs`
+repository names from the reviewed Satis sources.
 
 ## Configured repository secret names
 
