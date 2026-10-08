@@ -2,8 +2,8 @@ name: Configure registry reader authentication
 description: Mint a read-only package token and configure Composer to use it.
 
 inputs:
-  app-id:
-    description: GitHub App ID for composer-registry-reader.
+  client-id:
+    description: GitHub App Client ID for composer-registry-reader.
     required: true
   private-key:
     description: GitHub App private key for composer-registry-reader.
@@ -15,29 +15,22 @@ runs:
     - id: github-repositories
       shell: bash
       run: |
-        repositories="$({
-          jq -er '
-            [
-              .repositories[]
-              | select(.type == "vcs")
-              | .url
-              | select(startswith("https://github.com/astraonelabs/"))
-              | sub("^https://github\\.com/astraonelabs/"; "")
-              | sub("\\.git$"; "")
-            ]
-            | unique
-            | if length > 0 then join(",") else error("no Astra One Labs GitHub VCS repositories configured") end
-          ' satis.json
-        })"
-        echo "names=$repositories" >> "$GITHUB_OUTPUT"
+        jq -e '
+          [.repositories[] | select(.type == "vcs") | .url]
+          | . == ["https://github.com/astraonelabs/access-control.git"]
+        ' satis.json >/dev/null || {
+          echo "Reader refused: only the approved Access Control source is permitted." >&2
+          exit 1
+        }
 
     - id: app-token
-      uses: actions/create-github-app-token@67018539274d69449ef7c02e8e71183d1719ab42 # v2.1.4
+      uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
       with:
-        app-id: ${{ inputs.app-id }}
+        client-id: ${{ inputs.client-id }}
         private-key: ${{ inputs.private-key }}
         owner: astraonelabs
-        repositories: ${{ steps.github-repositories.outputs.names }}
+        repositories: access-control
+        permission-contents: read
 
     - shell: bash
       env:
