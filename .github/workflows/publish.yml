@@ -28,8 +28,8 @@ jobs:
 
       - uses: ./.github/actions/configure-reader-auth
         with:
-          client-id: ${{ vars.COMPOSER_REGISTRY_READER_CLIENT_ID }}
-          private-key: ${{ secrets.COMPOSER_REGISTRY_READER_PRIVATE_KEY }}
+          client-id: ${{ vars.ACCESS_CONTROL_READER_CLIENT_ID }}
+          private-key: ${{ secrets.ACCESS_CONTROL_READER_PRIVATE_KEY }}
 
       - name: Build Composer metadata
         env:
@@ -74,8 +74,8 @@ jobs:
 
       - uses: ./.github/actions/configure-reader-auth
         with:
-          client-id: ${{ vars.COMPOSER_REGISTRY_READER_CLIENT_ID }}
-          private-key: ${{ secrets.COMPOSER_REGISTRY_READER_PRIVATE_KEY }}
+          client-id: ${{ vars.ACCESS_CONTROL_READER_CLIENT_ID }}
+          private-key: ${{ secrets.ACCESS_CONTROL_READER_PRIVATE_KEY }}
 
       - name: Install from published catalog
         env:
