@@ -6,6 +6,8 @@ Code is delivered through `Masterix-Sistemas/composer-registry`. `main` is the d
 
 ## Pull request and validation
 
+PR titles and descriptions must be in English.
+
 Open one squash-merge pull request to `main` for an implementation ticket. Validate the changed workflow, action, documentation, or `satis.json` contract locally where possible. The repository has no pull-request GitHub Actions workflow; the `publish` workflow runs only by manual dispatch. The GitHub connector can inspect this public repository; use local Git plus structured GitHub tools or `gh` for pull requests and workflow status.
 
 Do not treat the lack of a PR workflow as permission to skip review or validation. Repository-content CI or review fixes return to `/implement` for renewed validation and code review.
