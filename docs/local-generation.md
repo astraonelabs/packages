@@ -69,7 +69,6 @@ The same script runs in the workflow and locally:
 
 ```sh
 bash scripts/build-catalog.sh satis.json public
-python3 scripts/validate-catalog.py satis.json public
 ```
 
 The output must be empty to prevent stale files from a previous catalog being
