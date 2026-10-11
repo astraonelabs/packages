@@ -52,12 +52,12 @@ verifies an authenticated consumer. Neither releasing a plugin nor generating
 locally dispatches publication. Publication has not been performed by this
 preparatory change.
 
-The reader-auth action derives repository names from the reviewed
-`https://github.com/astraonelabs/<repository>.git` URLs and mints a read-only
-GitHub App token scoped to those repositories. Existing secret names remain
-`COMPOSER_REGISTRY_READER_APP_ID` and
-`COMPOSER_REGISTRY_READER_PRIVATE_KEY`; operational reader access must be
-established for the current organization before publication.
+O reader usa a variable `ACCESS_CONTROL_READER_CLIENT_ID` e o secret
+`ACCESS_CONTROL_READER_PRIVATE_KEY`, do mesmo App, disponíveis em Foundation e
+Packages. A instalação e o token continuam limitados a Access Control com
+Contents read. Os nomes de entradas legados foram substituídos; o inventário
+preserva o snapshot histórico e registra a configuração vigente em adendo.
+O acesso operacional precisa ser configurado antes da publicação.
 
 ## Guides and ownership
 

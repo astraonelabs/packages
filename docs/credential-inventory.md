@@ -1,3 +1,12 @@
+> Adendo operacional — 08/10/2026: as tabelas abaixo são o snapshot histórico
+> de 02/08/2026 e não descrevem as entradas vigentes. O workflow CI01 usa
+> `vars.ACCESS_CONTROL_READER_CLIENT_ID` para `client-id` e
+> `secrets.ACCESS_CONTROL_READER_PRIVATE_KEY` para `private-key`, nos jobs build
+> e verify-consumer. Os mesmos valores do App reader são disponibilizados em
+> Foundation e Packages; instalação/token continuam somente em Access Control,
+> Contents read. Nenhuma configuração remota foi auditada ou alterada por este
+> adendo. As referências legadas abaixo são preservadas como evidência histórica.
+
 # Actions credential inventory
 
 This is a metadata-only audit of the Packages repository's configured
