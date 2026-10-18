@@ -2,6 +2,12 @@ name: publish
 
 on:
   workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish generated catalog to Pages
+        type: boolean
+        default: false
+        required: true
 
 permissions:
   contents: read
@@ -41,6 +47,7 @@ jobs:
           path: public
 
   deploy:
+    if: ${{ inputs.publish }}
     permissions:
       pages: write
       id-token: write

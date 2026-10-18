@@ -46,9 +46,14 @@ identity and absence of source/archive files. Generation never deploys.
 
 ## Publish after review and release
 
-Publication remains manual through `workflow_dispatch`. The workflow builds
-with `scripts/build-catalog.sh`, uploads only `public/`, deploys to Pages and
-verifies an authenticated consumer. Neither releasing a plugin nor generating
+Publication remains manual through `workflow_dispatch`. Its `publish` boolean
+input defaults to `false`: generate and inspect the Pages artifact on GitHub
+with the configured reader, then explicitly run with `publish=true` after
+inspection and authorization. The second run regenerates the catalog; see the
+[publication procedure](docs/publication.md) for comparison and verification.
+The workflow builds with `scripts/build-catalog.sh` and uploads only `public/`.
+With publication enabled, it deploys to Pages and verifies an authenticated
+consumer. Neither releasing a plugin nor generating
 locally dispatches publication. Publication has not been performed by this
 preparatory change.
 
