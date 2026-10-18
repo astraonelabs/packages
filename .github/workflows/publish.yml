@@ -2,6 +2,12 @@ name: publish
 
 on:
   workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish generated catalog to Pages
+        type: boolean
+        default: false
+        required: true
 
 permissions:
   contents: read
@@ -41,6 +47,7 @@ jobs:
           path: public
 
   deploy:
+    if: ${{ inputs.publish }}
     permissions:
       pages: write
       id-token: write
@@ -87,6 +94,6 @@ jobs:
           cd "$RUNNER_TEMP/consumer"
           composer init --name=astraone/catalog-verification --no-interaction
           composer config repositories.astraone composer "$PACKAGES_URL"
-          mapfile -t packages < <(jq -r '.require | keys[]' "$GITHUB_WORKSPACE/satis.json")
+          mapfile -t packages < <(jq -r '.require | to_entries[] | "\(.key):\(.value)"' "$GITHUB_WORKSPACE/satis.json")
           test "${#packages[@]}" -gt 0
           composer require "${packages[@]}" --no-interaction --no-progress
